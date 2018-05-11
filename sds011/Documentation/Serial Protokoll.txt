@@ -1,0 +1,43 @@
+(here ist just a hint for me which wires I used on my bread board
+yellow on sensor tx
+green on sensor rx
+Use extra power device for the sensor
+)
+
+My sensors is showing up with firmware version 160829 and ID=CC0B in the Windows software.
+
+What I found out is
+
+ID
+---------------------------------------------
+set ( cc:0a) aa:b4:05:00:00:00:00:00:00:00:00:00:00:cc:0a:ff:ff:d9:ab
+
+Report Mode:
+------------------------
+Initiative set aa:b4:02:01:00:00:00:00:00:00:00:00:00:00:00:ff:ff:01:ab Response aa:c5:02:01:00:00:cc:0b:da:ab
+Passiv     set aa:b4:02:01:01:00:00:00:00:00:00:00:00:00:00:ff:ff:02:ab Response aa:c5:02:01:01:00:cc:0b:db:ab
+
+Botton Request once aa:b4:04:00:00:00:00:00:00:00:00:00:00:00:00:ff:ff:02:ab Response (Data!) aa:c0:86:00:42:01:cc:0b:a0:ab
+--------------------
+
+Work state:
+---------------------
+
+Sleeping   set aa:b4:06:01:00:00:00:00:00:00:00:00:00:00:00:ff:ff:05:ab Response aa:c5:06:01:00:00:cc:0b:de:ab
+Measureing set aa:b4:06:01:01:00:00:00:00:00:00:00:00:00:00:ff:ff:06:ab Response aa:c5:06:01:01:00:cc:0b:df:ab
+
+Duty Cycle
+------------------------
+1 set aa:b4:08:01:01:00:00:00:00:00:00:00:00:00:00:ff:ff:08:ab Response aa:c5:08:01:01:00:cc:0b:e1:ab
+2 set aa:b4:08:01:02:00:00:00:00:00:00:00:00:00:00:ff:ff:09:ab Response aa:c5:08:01:02:00:cc:0b:e2:ab
+3 set aa:b4:08:01:03:00:00:00:00:00:00:00:00:00:00:ff:ff:0a:ab Response aa:c5:08:01:03:00:cc:0b:e3:ab
+
+3 get aa:b4:08:00:00:00:00:00:00:00:00:00:00:00:00:ff:ff:06:ab Response aa:c5:08:00:03:00:cc:0b:e2:ab
+
+0 get aa:b4:08:00:00:00:00:00:00:00:00:00:00:00:00:ff:ff:06:ab Response aa:c5:08:00:00:00:cc:0b:df:ab
+
+Firmware
+ send 1 aa:b4:07:00:00:00:00:00:00:00:00:00:00:00:00:ff:ff:05:ab Response aa:c5:07:10:08:1d:cc:0b:13:ab
+ send 2 aa:b4:07:00:00:00:00:00:00:00:00:00:00:00:00:ff:ff:05:ab Response aa:c0:24:00:cd:00:cc:0b:c8:ab
+
+So this is a good starting point to build a Sensor Class. It's my first python project

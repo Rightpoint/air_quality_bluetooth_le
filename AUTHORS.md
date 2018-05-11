@@ -1,11 +1,10 @@
-=======
 Credits
 =======
 
 Development Lead
 ----------------
 
-* Chris Ballinger <chris.ballinger@raizlabs.com>
+-   Chris Ballinger \<<chris.ballinger@raizlabs.com>\>
 
 Contributors
 ------------
