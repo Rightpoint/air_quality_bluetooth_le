@@ -7,7 +7,7 @@ import pytest
 
 from click.testing import CliRunner
 
-from aqi_ble import aqi_ble
+from aqi_ble import sensor
 from aqi_ble import cli
 
 

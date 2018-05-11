@@ -3,14 +3,22 @@
 """Console script for aqi_ble."""
 import sys
 import click
+from sensor import Sensor, SensorReading
 
 
 @click.command()
-def main(args=None):
+@click.option('-p', '--path', required=True, type=click.Path(exists=True), help='Path to USB TTY sensor device. e.g. /dev/ttyUSB0')
+def main(path: str):
     """Console script for aqi_ble."""
     click.echo("Replace this message by putting your code into "
                "aqi_ble.cli.main")
-    click.echo("See click documentation at http://click.pocoo.org/")
+    click.echo(f"Opening sensor at path: {path}")
+    sensor = Sensor(path=path)
+    while True:
+        reading = sensor.get_reading()
+        if reading is not None:
+            print(f"Reading: {reading.as_string()}")
+
     return 0
 
 
