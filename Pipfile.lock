@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "30702a3e8f214a6da13d42fee8bc60cf6e1754c4479f38ae1766e5019e9ef6ba"
+            "sha256": "d72686d138005b09a5d114b1ea4718eb88c075e585ee552d57e57ad0620288de"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -37,6 +37,41 @@
             ],
             "index": "pypi",
             "version": "==6.7"
+        },
+        "pyobjc-core": {
+            "hashes": [
+                "sha256:2496357032c390fbce35c7dc29c91cafcc8686d4b909bc09c649fa8fd85d6938",
+                "sha256:4af7106cb7ad86b56bfd6dc8a841217418582715b2f982045ca4778a92e63b15",
+                "sha256:5d9a8fac87ec37c2d05a30430abdedb1135b46e2b00887076d8d960430a7f31c",
+                "sha256:a712eae1d89f952d3814df90eed7b6afcb5816db24d1a86b4f97e0810534119e",
+                "sha256:c2399e9e4942f926945d196bfd044c59bcd60d8e6a663a14286ab4f3b0a7a116",
+                "sha256:c372a912f2f83b3c419c7044edc04f3dd8f3f4ee6cddf7f05ff5f0483ccd73ea"
+            ],
+            "version": "==4.2.1"
+        },
+        "pyobjc-framework-cocoa": {
+            "hashes": [
+                "sha256:15bcb9c0d35feef594497edd52dabac60a0ae60360d2e277993104323fa4814a",
+                "sha256:89325066429b155e510ee45fd8cc862daa62b6eaf9543f0f9994ba6563e6f1f1",
+                "sha256:8ef446b1803b2392ce4df1a3600e8d5f1bc577206d57e30142c8425555009000",
+                "sha256:b9f72af16f2acfa7c388dc029c8324b6975bc62e66409f2e85c9205dec9c7d92",
+                "sha256:e4054600909cbc6f685a2e13c3eabc6945da937207a4a912c6b5a1704fef2dc6",
+                "sha256:e9b361a9151054696a7503d8a80c93ceef36d74c44c7196f7284945baf538101"
+            ],
+            "version": "==4.2.1"
+        },
+        "pyobjc-framework-corebluetooth": {
+            "hashes": [
+                "sha256:3f67b5958e8786a8cf6f4a58c5850396fa7de5f96080b4a826e003fa52c259a8",
+                "sha256:446f1677c820a8cc0d671149942bf9ba27a9044a6c3fbfeb054217c050d6a784",
+                "sha256:77026282f913973829210637fecb9d6e75bdeabf1d2d44b2cb70a451520699af",
+                "sha256:88c1771466df437188de13c51c203c9905d0dd0ffac558d9b6b5c92f409e2606",
+                "sha256:d00015374fbc3c92ec6b196b012b6c9261c91aed12faf457b13d0531f6d92bda",
+                "sha256:ebf182a6924d99ff8a7950ff6ada0fc75ac876d453e43bdfb7e1eff6c7ab7cb6"
+            ],
+            "index": "pypi",
+            "markers": "sys_platform == 'darwin'",
+            "version": "==4.2.1"
         },
         "pyserial": {
             "hashes": [

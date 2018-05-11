@@ -7,6 +7,7 @@ name = "pypi"
 click = "*"
 bluezero = "*"
 pyserial = "*"
+pyobjc-framework-CoreBluetooth = {version = "*", sys_platform = "== 'darwin'"}
 
 [dev-packages]
 bumpversion = "*"

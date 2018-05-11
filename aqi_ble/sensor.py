@@ -13,7 +13,7 @@ class SensorReading:
         self.pm_10 = pm_10
 
     def as_string(self) -> str:
-        return f"PM2.5 {self.pm_2_5} PM10 {self.pm_10}"
+        return f"PM2.5: {self.pm_2_5}\tPM10: {self.pm_10}"
 
 
 class Sensor:
