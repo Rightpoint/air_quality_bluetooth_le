@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 click = "*"
 bluezero = "*"
+pyserial = "*"
 
 [dev-packages]
 bumpversion = "*"
