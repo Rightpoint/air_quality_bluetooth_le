@@ -35,5 +35,5 @@ class Spreadsheet:
                 row.append(reading.location.elevation)
         if self.heading is None:
             self.heading = heading
-            self.worksheet.append_row(heading)
+            self.worksheet.insert_row(heading)
         self.worksheet.append_row(row)
