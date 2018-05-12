@@ -57,5 +57,5 @@ class Sensor:
         values = self.sensor.get_values()
         if values is None:
             return None
-        reading = SensorReading(pm2_5=values[0], pm10=values[1], sensor_name=self.name, location=self.location)
+        reading = SensorReading(pm2_5=values[1], pm10=values[0], sensor_name=self.name, location=self.location)
         return reading
