@@ -12,6 +12,7 @@ dataclasses = "*"
 maya = "*"
 gspread = "*"
 oauth2client = "*"
+pytz = "*"
 
 [dev-packages]
 bumpversion = "*"

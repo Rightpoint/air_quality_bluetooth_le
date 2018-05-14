@@ -64,7 +64,19 @@ $ python aqi_ble/cli.py -p /dev/tty.wchusbserial1420
 $ python aqi_ble/cli.py -p /dev/ttyUSB0
 ```
 
+#### Google Sheets
 
+Create Google OAuth2 Signed Credentails: http://gspread.readthedocs.io/en/latest/oauth2.html
+
+Place credentials file in `private_keys/sheets-api-key.json`, we will use this later for the `json_keyfile` path.
+
+Create a new Google Sheet and share it (edit access) with the email listed for `client_email` in `sheets-api-key.json`. Copy the Share URL of the Google Sheet, which we will use for `sheet_url`.
+
+Pass the path to `json_keyfile` and `sheet_url`
+
+```
+$ python aqi_ble/cli.py -p /dev/tty.wchusbserial1420 --name "RZWest" --coordinate 37.8066073985003 -122.27042233335567 --elevation 57.6072 --json_keyfile private_keys/sheets-api-key.json --sheet_url https://docs.google.com/spreadsheets/d/1F_1LBbbF...LzYhv-SB2QGZv0
+```
 
 ## Dependencies
 

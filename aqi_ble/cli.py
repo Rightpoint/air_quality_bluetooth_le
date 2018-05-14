@@ -6,6 +6,7 @@ import click
 from sheets import Spreadsheet
 from sensor import Sensor, SensorReading, Location
 from typing import Optional, Tuple
+import time
 
 
 @click.command()
@@ -35,6 +36,7 @@ def main(path: str,
             print(f"{reading}")
             if sheet is not None:
                 sheet.post_reading(reading)
+        time.sleep(5)
     return 0
 
 

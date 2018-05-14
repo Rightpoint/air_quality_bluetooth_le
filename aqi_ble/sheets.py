@@ -1,10 +1,50 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from sensor import SensorReading
-from typing import Optional, List, Any
+from typing import Optional, List, Tuple
 import sys
 # Backport of Python 3.7 dataclasses. Remove when Python 3.7 is released!
 from dataclasses import dataclass
+from enum import Enum, auto
+
+
+@dataclass
+class Row:
+    @dataclass
+    class Cell:
+        class Type(Enum):
+            name = "Name"
+            latitude = "Latitude"
+            longitude = "Longitude"
+            elevation = "Elevation"
+            timestamp = "Timestamp"
+            pm2_5 = "PM2.5"
+            pm10 = "PM10"
+        type: Type
+        value: str
+
+    columns: [Cell]
+
+    def get_heading(self) -> [str]:
+        heading: [str] = []
+        for column in self.columns:
+            heading.append(column.type.value)
+        return heading
+
+    def get_values(self) -> [str]:
+        values: [str] = []
+        for column in self.columns:
+            values.append(column.value)
+        return values
+
+    @classmethod
+    def from_reading(cls, reading: SensorReading):
+        columns: [Row.Cell] = [
+            Row.Cell(type=Row.Cell.Type.timestamp, value=reading.timestamp_str()),
+            Row.Cell(type=Row.Cell.Type.pm2_5, value=str(reading.pm2_5)),
+            Row.Cell(type=Row.Cell.Type.pm10, value=str(reading.pm10)),
+        ]
+        return Row(columns=columns)
 
 
 class Spreadsheet:
@@ -12,7 +52,9 @@ class Spreadsheet:
     worksheet: Optional[gspread.Worksheet] = None
     heading: Optional[List[str]] = None
 
-    def __init__(self, json_keyfile: str, sheet_url: str):
+    def __init__(self,
+                 json_keyfile: str,
+                 sheet_url: str):
         scope = ['https://spreadsheets.google.com/feeds',
                  'https://www.googleapis.com/auth/drive']
 
@@ -27,21 +69,11 @@ class Spreadsheet:
             print(f"Spreadsheet not found: {err}", file=sys.stderr)
 
     def post_reading(self, reading: SensorReading):
-        heading: List[str] = ['Timestamp', 'PM2.5', 'PM10']
-        row: List[str] = [reading.get_timestamp(), reading.pm2_5, reading.pm10]
-        if reading.sensor_name is not None:
-            heading.append('Name')
-            row.append(reading.sensor_name)
-        if reading.location is not None:
-            heading.append('Latitude')
-            heading.append('Longitude')
-            row.append(reading.location.latitude)
-            row.append(reading.location.longitude)
-            if reading.location.elevation is not None:
-                heading.append('Elevation (meters)')
-                row.append(reading.location.elevation)
+        if self.worksheet is None:
+            return
+        row: Row = Row.from_reading(reading)
         if self.heading is None:
-            self.heading = heading
-            self.worksheet.insert_row(heading)
-        self.worksheet.append_row(row)
-
+            self.heading = row.get_heading()
+            self.worksheet.insert_row(index=1, values=self.heading)
+        values = row.get_values()
+        self.worksheet.insert_row(index=2, values=values)
