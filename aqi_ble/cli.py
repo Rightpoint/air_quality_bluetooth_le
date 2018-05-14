@@ -5,7 +5,8 @@ import sys
 import click
 from sheets import Spreadsheet
 from sensor import Sensor, SensorReading, Location
-from typing import Optional
+from typing import Optional, Tuple
+
 
 @click.command()
 @click.option('-p', '--path', required=True, type=click.Path(exists=True), help='Path to USB TTY sensor device. e.g. /dev/ttyUSB0')
@@ -14,7 +15,12 @@ from typing import Optional
 @click.option('--coordinate', type=(float, float), help='GPS Coordinate (Latitude Longitude) e.g. 37.8066073985003 -122.27042233335567')
 @click.option('--elevation', type=float, help='Sensor Elevation in Meters e.g. 40')
 @click.option('--name', help='Sensor Name e.g. Bedroom')
-def main(path: str, json_keyfile: Optional[str], sheet_url: Optional[str], coordinate: (float, float), elevation: Optional[float], name: Optional[str]):
+def main(path: str,
+         json_keyfile: Optional[str],
+         sheet_url: Optional[str],
+         coordinate: Optional[Tuple[float, float]],
+         elevation: Optional[float],
+         name: Optional[str]):
     click.echo(f"Opening sensor at path: {path}")
     location: Optional[Location] = None
     if coordinate is not None:

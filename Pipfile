@@ -7,12 +7,16 @@ name = "pypi"
 click = "*"
 bluezero = "*"
 pyserial = "*"
-pyobjc-framework-CoreBluetooth = {version = "*", sys_platform = "== 'darwin'"}
+# Backport of Python 3.7 dataclasses. Remove when Python 3.7 is released!
+dataclasses = "*"
+maya = "*"
+gspread = "*"
+oauth2client = "*"
 
 [dev-packages]
 bumpversion = "*"
 watchdog = "*"
-"flake8" = "*"
+flake8 = "*"
 tox = "*"
 coverage = "*"
 twine = "*"

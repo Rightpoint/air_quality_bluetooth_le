@@ -64,6 +64,8 @@ $ python aqi_ble/cli.py -p /dev/tty.wchusbserial1420
 $ python aqi_ble/cli.py -p /dev/ttyUSB0
 ```
 
+
+
 ## Dependencies
 
 * [sds011_particle_sensor](https://gitlab.com/frankrich/sds011_particle_sensor) - Control your Nova Fitness SDS011 (PM2.5, PM10) air-particle sensor via python. Control duty cycle, passive mode, sleep mode, get firmware version etc. on windows. linux and even raspberry pi.
