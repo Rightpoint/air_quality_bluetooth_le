@@ -1,9 +1,11 @@
 Air Quality Bluetooth LE
 ========================
 
+[![CircleCI](https://img.shields.io/circleci/project/github/Raizlabs/air_quality_bluetooth_le/master.svg)](https://circleci.com/gh/Raizlabs/air_quality_bluetooth_le)
 [![image](https://img.shields.io/pypi/v/aqi_ble.svg)](https://pypi.python.org/pypi/aqi_ble)
 [![image](https://img.shields.io/travis/Raizlabs/aqi_ble.svg)](https://travis-ci.org/Raizlabs/aqi_ble)
 [![Documentation Status](https://readthedocs.org/projects/aqi-ble/badge/?version=latest)](https://aqi-ble.readthedocs.io/en/latest/?badge=latest)
+
 
 Bluetooth Low Energy interface for SDS011 APM2.5 air quality sensor
 
