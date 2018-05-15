@@ -47,7 +47,3 @@ jobs:
           name: Run Tests
           command: |
             pipenv run make test
-
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
