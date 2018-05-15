@@ -30,7 +30,7 @@ jobs:
       - run:
           name: apt-get install
           command: |
-            sudo apt-get install -y libdbus-1-dev libcairo2
+            sudo apt-get install -y libdbus-1-dev libcairo2 libglib2.0-dev
 
       - run:
           name: Sync Pipfile
