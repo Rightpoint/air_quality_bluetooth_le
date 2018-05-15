@@ -28,12 +28,12 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: Install DBus
+          name: apt-get install
           command: |
-            sudo apt-get install -y libdbus-1-dev
+            sudo apt-get install -y libdbus-1-dev gobject-introspection
 
       - run:
-          name: Install Dependencies
+          name: Sync Pipfile
           command: |
             pipenv sync --dev
 

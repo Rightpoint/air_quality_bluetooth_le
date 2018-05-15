@@ -152,7 +152,7 @@ Go to Debugger -> Add Configuration -> `launch.json`, then add the following ent
 On your Raspberry Pi you'll need `libdbus` installed to install the Python dependencies.
 
 ```bash
-$ sudo apt-get install libdbus-1-dev
+$ sudo apt-get install libdbus-1-dev gobject-introspection
 ```
 
 
