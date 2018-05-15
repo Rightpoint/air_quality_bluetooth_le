@@ -7,9 +7,7 @@ import pytest
 
 from click.testing import CliRunner
 
-from aqi_ble import sensor
-from aqi_ble import cli
-
+from aqi_ble import main
 
 @pytest.fixture
 def response():
@@ -30,9 +28,10 @@ def test_content(response):
 def test_command_line_interface():
     """Test the CLI."""
     runner = CliRunner()
-    result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'aqi_ble.cli.main' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
+    # result = runner.invoke(main.main)
+    # assert result.exit_code == 0
+    # assert 'aqi_ble.main.main' in result.output
+    help_result = runner.invoke(main.main, ['--help'])
     assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
+    assert 'Show this message and exit.' in help_result.output
+    assert '--help' in help_result.output
