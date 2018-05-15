@@ -6,12 +6,13 @@ import sys
 import click
 from .sheets import Spreadsheet
 from .sensor import Sensor, SensorReading, Location
+from .manager import Manager
 from typing import Optional, Tuple
 import time
 
 
 @click.command()
-@click.option('-p', '--path', required=True, type=click.Path(exists=True), help='Path to USB TTY sensor device. e.g. /dev/ttyUSB0')
+@click.option('-p', '--path', required=True, type=click.Path(exists=True), help='Path to SDS011 USB TTY sensor device. e.g. /dev/ttyUSB0')
 @click.option('--json_keyfile', type=click.Path(exists=True), help='Path to Google OAuth JSON Keyfile')
 @click.option('--sheet_url', help='Google Sheets URL')
 @click.option('--coordinate', nargs=2, type=float, help='GPS Coordinate (Latitude Longitude) e.g. 37.8066073985003 -122.27042233335567')
@@ -40,19 +41,9 @@ def main(path: str,
         if remote_debug_wait:
             ptvsd.wait_for_attach()
     click.echo(f"Opening sensor at path: {path}")
-    location: Optional[Location] = None
-    if len(coordinate) == 2:
-        location = Location(
-            latitude=coordinate[0], longitude=coordinate[1], elevation=elevation)
-    sensor = Sensor(path=path, location=location, name=name)
-    sheet: Optional[Spreadsheet] = None
-    if json_keyfile is not None and sheet_url is not None:
-        sheet = Spreadsheet(json_keyfile=json_keyfile, sheet_url=sheet_url)
+    manager = Manager(path=path, json_keyfile=json_keyfile, sheet_url=sheet_url,
+                      coordinate=coordinate, elevation=elevation, name=name)
     while True:
-        reading = sensor.get_reading()
-        if reading is not None:
-            print(f"{reading}")
-            if sheet is not None:
-                sheet.post_reading(reading)
-        time.sleep(5)
+        manager.get_reading()
+        time.sleep(2)
     return 0

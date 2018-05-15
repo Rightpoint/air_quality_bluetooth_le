@@ -47,6 +47,7 @@ class SensorReading:
 class Sensor:
     name: str = "Sensor"
     location: Optional[Location] = None
+    sensor: SDS011
 
     def __init__(self,
                  path: str,
@@ -59,6 +60,9 @@ class Sensor:
         timeout: int = 2  # timeout on serial line read
         self.sensor = SDS011(path, timeout=timeout,
                              unit_of_measure=unit_of_measure)
+
+    def reset(self):
+        self.sensor.reset()
 
     def __str__(self) -> str:
         return f"Sensor Name: {self.name}\tLocation: {self.location}"
