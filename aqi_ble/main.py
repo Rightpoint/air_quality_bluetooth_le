@@ -18,6 +18,7 @@ import time
 @click.option('--coordinate', nargs=2, type=float, help='GPS Coordinate (Latitude Longitude) e.g. 37.8066073985003 -122.27042233335567')
 @click.option('--elevation', type=float, help='Sensor Elevation in Meters e.g. 40')
 @click.option('--name', help='Sensor Name e.g. Bedroom')
+@click.option('--enable_bluetooth', type=bool, help='Enable Bluetooth Peripheral (Linux Only)')
 @click.option('--remote_debug_secret', help='Remote Debugging attachment secret e.g. my_secret')
 @click.option('--remote_debug_address', help='Remote Debugging IP e.g. 0.0.0.0')
 @click.option('--remote_debug_port', type=int, help='Remote Debugging port e.g. 3000')
@@ -28,6 +29,7 @@ def main(path: str,
          coordinate: Optional[Tuple[float, float]],
          elevation: Optional[float],
          name: Optional[str],
+         enable_bluetooth: Optional[bool],
          remote_debug_secret: Optional[str],
          remote_debug_address: Optional[str],
          remote_debug_port: Optional[int],
@@ -42,7 +44,7 @@ def main(path: str,
             ptvsd.wait_for_attach()
     click.echo(f"Opening sensor at path: {path}")
     manager = Manager(path=path, json_keyfile=json_keyfile, sheet_url=sheet_url,
-                      coordinate=coordinate, elevation=elevation, name=name)
+                      coordinate=coordinate, elevation=elevation, name=name, enable_bluetooth=enable_bluetooth)
     while True:
         manager.get_reading()
         time.sleep(2)

@@ -2,11 +2,20 @@
 from .sheets import Spreadsheet
 from .sensor import Sensor, SensorReading, Location
 from typing import Optional, Tuple
+import sys
+
+try:
+    from .ble import BLE_Peripheral
+except ImportError:
+    class BLE_Peripheral:
+        def __init__(self):
+            print("Bluetooth support not available!", file=sys.stderr)
 
 
 class Manager:
     sensor: Sensor
     sheet: Optional[Spreadsheet]
+    peripheral: Optional[BLE_Peripheral]
 
     def __init__(self,
                  path: str,
@@ -14,7 +23,8 @@ class Manager:
                  sheet_url: Optional[str],
                  coordinate: Optional[Tuple[float, float]],
                  elevation: Optional[float],
-                 name: Optional[str]):
+                 name: Optional[str],
+                 enable_bluetooth: Optional[bool]):
         location: Optional[Location] = None
         if len(coordinate) == 2:
             location = Location(
@@ -24,6 +34,8 @@ class Manager:
         if json_keyfile is not None and sheet_url is not None:
             self.sheet = Spreadsheet(
                 json_keyfile=json_keyfile, sheet_url=sheet_url)
+        if enable_bluetooth is True:
+            self.peripheral = BLE_Peripheral()
 
     def reset_sensor(self):
         self.sensor.reset()
@@ -34,7 +46,7 @@ class Manager:
         except (KeyboardInterrupt, SystemExit):
             raise
         except Exception as e:
-            print(f"Could not read from sensor: {e}")
+            print(f"Could not read from sensor: {e}", file=sys.stderr)
         if reading is None:
             return
         print(f"{reading}")
@@ -44,4 +56,4 @@ class Manager:
             except (KeyboardInterrupt, SystemExit):
                 raise
             except Exception as e:
-                print(f"Could not post to spreadsheet: {e}")
+                print(f"Could not post to spreadsheet: {e}", file=sys.stderr)

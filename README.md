@@ -147,6 +147,9 @@ Go to Debugger -> Add Configuration -> `launch.json`, then add the following ent
 },
 ```
 
+[Remote debugging](https://benoitpatra.com/2017/11/27/remote-debugging-python-with-vscode/) is a bit more complicated. 
+
+
 
 ## Dependencies
 

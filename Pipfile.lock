@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f1aa2fd33b70394b748bf7c978d7dddd97f3918bee0b253f1fd622d4a30998b7"
+            "sha256": "03774e071bac60bfd50337c784e12dbf23ec98c63d8b580fc92f01068734cb23"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -28,6 +28,7 @@
                 "sha256:3765034fa560ef2f1654e8153eddf973aef07b9fd813ad6d585d117378f6b974"
             ],
             "index": "pypi",
+            "markers": "sys_platform == 'linux'",
             "version": "==0.0.6"
         },
         "certifi": {
@@ -59,6 +60,14 @@
             ],
             "index": "pypi",
             "version": "==0.5"
+        },
+        "dbus-python": {
+            "hashes": [
+                "sha256:abf12bbb765e300bf8e2a1b2f32f85949eab06998dbda127952c31cb63957b6f"
+            ],
+            "index": "pypi",
+            "markers": "sys_platform == 'linux'",
+            "version": "==1.2.8"
         },
         "gspread": {
             "hashes": [
@@ -185,10 +194,10 @@
         },
         "astroid": {
             "hashes": [
-                "sha256:35cfae47aac19c7b407b7095410e895e836f2285ccf1220336afba744cc4c5f2",
-                "sha256:38186e481b65877fd8b1f9acc33e922109e983eb7b6e487bd4c71002134ad331"
+                "sha256:032f6e09161e96f417ea7fad46d3fac7a9019c775f202182c22df0e4f714cb1c",
+                "sha256:dea42ae6e0b789b543f728ddae7ddb6740ba33a49fb52c4a4d9cb7bb4aa6ec09"
             ],
-            "version": "==1.6.3"
+            "version": "==1.6.4"
         },
         "attrs": {
             "hashes": [
@@ -441,11 +450,11 @@
         },
         "pylint": {
             "hashes": [
-                "sha256:0b7e6b5d9f1d4e0b554b5d948f14ed7969e8cdf9a0120853e6e5af60813b18ab",
-                "sha256:34738a82ab33cbd3bb6cd4cef823dbcabdd2b6b48a4e3a3054a2bbbf0c712be9"
+                "sha256:b719c86a7395ea0c0ec8030c2a7a2b4fad573ee50460f9948fabb1811d72094f",
+                "sha256:cf1be367296e9e534a5cb420186ce99f63f17c2b855fcb4321a3e20ce51502cd"
             ],
             "index": "pypi",
-            "version": "==1.8.4"
+            "version": "==1.9.0"
         },
         "pyparsing": {
             "hashes": [

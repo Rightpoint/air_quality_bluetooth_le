@@ -5,13 +5,15 @@ name = "pypi"
 
 [packages]
 click = "*"
-bluezero = "*"
 pyserial = "*"
 # Backport of Python 3.7 dataclasses. Remove when Python 3.7 is released!
 dataclasses = "*"
 gspread = "*"
 oauth2client = "*"
 pytz = "*"
+dbus-python = { version = "*", sys_platform = "== 'linux'"}
+bluezero = { version = "*", sys_platform = "== 'linux'"}
+# PyGObject = { version = "*", sys_platform = "== 'linux'"}
 
 [dev-packages]
 bumpversion = "*"
