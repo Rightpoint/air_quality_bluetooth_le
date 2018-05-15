@@ -55,6 +55,29 @@ To try it out use `pipenv shell` to activate the virtual environment:
 $ pipenv shell
 ```
 
+You can list all the options with `cli.py --help`:
+
+```bash
+$ ./cli.py --help
+Usage: cli.py [OPTIONS]
+
+Options:
+  -p, --path PATH              Path to USB TTY sensor device. e.g.
+                               /dev/ttyUSB0  [required]
+  --json_keyfile PATH          Path to Google OAuth JSON Keyfile
+  --sheet_url TEXT             Google Sheets URL
+  --coordinate FLOAT...        GPS Coordinate (Latitude Longitude) e.g.
+                               37.8066073985003 -122.27042233335567
+  --elevation FLOAT            Sensor Elevation in Meters e.g. 40
+  --name TEXT                  Sensor Name e.g. Bedroom
+  --remote_debug_secret TEXT   Remote Debugging attachment secret e.g.
+                               my_secret
+  --remote_debug_address TEXT  Remote Debugging IP e.g. 0.0.0.0
+  --remote_debug_port INTEGER  Remote Debugging port e.g. 3000
+  --remote_debug_wait BOOLEAN  Wait for Remote Debugger to attach
+  --help                       Show this message and exit.
+```
+
 Then run our command line program to read out the sensor values:
 
 ```
@@ -80,7 +103,9 @@ $ python aqi_ble/cli.py -p /dev/tty.wchusbserial1420 --name "RZWest" --coordinat
 
 ## Configuring VS Code
 
-Get the pipenv virtual environment and set it up for VS Code.
+Go to the Plugins tab and add the official [Python plugin](https://marketplace.visualstudio.com/items?itemName=ms-python.python).
+
+Next we'll get the Pipenv virtual environment and set it up for VS Code.
 
 ```bash
 $ pipenv --venv
@@ -91,8 +116,33 @@ Edit Workspace settings `python.pythonPath`, using the value on your machine fro
 
 ```json
 {
-    "python.pythonPath": "/Users/username/.local/share/virtualenvs/air_quality_bluetooth_le-PO89Jxuj/bin/python"
+    "python.pythonPath": "$HOME/.local/share/virtualenvs/air_quality_bluetooth_le-PO89Jxuj/bin/python"
 }
+```
+
+It's also useful to edit User Settings and add `editor.formatOnSave` to automatically format your code to the PEP8 style guide.
+
+```json
+{
+    "editor.formatOnSave": true
+}
+```
+
+VS Code may prompt you to install `pylint` and `autopep8`.
+
+Go to Debugger -> Add Configuration -> `launch.json`, then add the following entry. You can modify the arguments as needed, and/or make additional launch configurations.
+
+```json
+{
+    "name": "Python AQI (macOS)",
+    "type": "python",
+    "request": "launch",
+    "program": "${workspaceFolder}/cli.py",
+    "args": [
+        "-p",
+        "/dev/tty.wchusbserial1420"
+    ]
+},
 ```
 
 
