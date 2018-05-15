@@ -1,6 +1,6 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from sensor import SensorReading
+from .sensor import SensorReading
 from typing import Optional, List, Tuple
 import sys
 # Backport of Python 3.7 dataclasses. Remove when Python 3.7 is released!
@@ -40,7 +40,8 @@ class Row:
     @classmethod
     def from_reading(cls, reading: SensorReading):
         columns: [Row.Cell] = [
-            Row.Cell(type=Row.Cell.Type.timestamp, value=reading.timestamp_str()),
+            Row.Cell(type=Row.Cell.Type.timestamp,
+                     value=reading.timestamp_str()),
             Row.Cell(type=Row.Cell.Type.pm2_5, value=str(reading.pm2_5)),
             Row.Cell(type=Row.Cell.Type.pm10, value=str(reading.pm10)),
         ]
@@ -58,7 +59,8 @@ class Spreadsheet:
         scope = ['https://spreadsheets.google.com/feeds',
                  'https://www.googleapis.com/auth/drive']
 
-        credentials = ServiceAccountCredentials.from_json_keyfile_name(json_keyfile, scope)
+        credentials = ServiceAccountCredentials.from_json_keyfile_name(
+            json_keyfile, scope)
         gc = gspread.authorize(credentials)
         try:
             self.spreadsheet = gc.open_by_url(sheet_url)

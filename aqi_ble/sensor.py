@@ -2,9 +2,8 @@
 
 """Main module."""
 
-from sds011 import SDS011
+from .sds011 import SDS011
 from typing import Optional, List
-import maya
 import datetime as dt
 import pytz
 # Backport of Python 3.7 dataclasses. Remove when Python 3.7 is released!
@@ -57,7 +56,8 @@ class Sensor:
         self.location = location
         unit_of_measure = SDS011.UnitsOfMeasure.MassConcentrationEuropean
         timeout: int = 2  # timeout on serial line read
-        self.sensor = SDS011(path, timeout=timeout, unit_of_measure=unit_of_measure)
+        self.sensor = SDS011(path, timeout=timeout,
+                             unit_of_measure=unit_of_measure)
 
     def __str__(self) -> str:
         return f"Sensor Name: {self.name}\tLocation: {self.location}"

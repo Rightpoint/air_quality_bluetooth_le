@@ -38,7 +38,7 @@ Then clone the repo and run `pipenv` to install the dependencies:
 ```
 $ git clone https://github.com/Raizlabs/air_quality_bluetooth_le.git
 $ cd air_quality_bluetooth_le/
-$ pipenv install
+$ pipenv install --dev
 ```
 
 ### Running
@@ -59,9 +59,9 @@ Then run our command line program to read out the sensor values:
 
 ```
 # macOS
-$ python aqi_ble/cli.py -p /dev/tty.wchusbserial1420
+$ python cli.py -p /dev/tty.wchusbserial1420
 # Linux
-$ python aqi_ble/cli.py -p /dev/ttyUSB0
+$ python cli.py -p /dev/ttyUSB0
 ```
 
 #### Google Sheets
@@ -77,6 +77,24 @@ Pass the path to `json_keyfile` and `sheet_url`
 ```
 $ python aqi_ble/cli.py -p /dev/tty.wchusbserial1420 --name "RZWest" --coordinate 37.8066073985003 -122.27042233335567 --elevation 57.6072 --json_keyfile private_keys/sheets-api-key.json --sheet_url https://docs.google.com/spreadsheets/d/1F_1LBbbF...LzYhv-SB2QGZv0
 ```
+
+## Configuring VS Code
+
+Get the pipenv virtual environment and set it up for VS Code.
+
+```bash
+$ pipenv --venv
+/Users/username/.local/share/virtualenvs/air_quality_bluetooth_le-PO89Jxuj
+```
+
+Edit Workspace settings `python.pythonPath`, using the value on your machine from `pipenv --venv` above with `bin/python` appended to the end.
+
+```json
+{
+    "python.pythonPath": "/Users/username/.local/share/virtualenvs/air_quality_bluetooth_le-PO89Jxuj/bin/python"
+}
+```
+
 
 ## Dependencies
 
