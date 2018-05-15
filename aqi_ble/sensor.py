@@ -34,7 +34,8 @@ class SensorReading:
     location: Optional[Location] = None
 
     def timestamp_str(self) -> str:
-        return self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        # return self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        return self.timestamp.strftime("%m/%d/%Y %H:%M:%S")
 
     def __str__(self) -> str:
         string: str = f"{self.sensor_name} - "
