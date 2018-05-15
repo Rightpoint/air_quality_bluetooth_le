@@ -28,6 +28,11 @@ jobs:
           - v1-dependencies-
 
       - run:
+          name: Install DBus
+          command: |
+            sudo apt-get install -y dbus
+
+      - run:
           name: Install Dependencies
           command: |
             pipenv sync --dev
