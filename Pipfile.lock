@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "03774e071bac60bfd50337c784e12dbf23ec98c63d8b580fc92f01068734cb23"
+            "sha256": "1a62a3fd4d425a100e2e4d495f438006ada646544dc520f926c0e5103ce4df60"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -131,6 +131,22 @@
                 "sha256:f53fe5bcebdf318f51399b250fe8325ef3a26d927f012cc0c8e0f9e9af7f9deb"
             ],
             "version": "==0.2.1"
+        },
+        "pycairo": {
+            "hashes": [
+                "sha256:cdd4d1d357325dec3a21720b85d273408ef83da5f15c184f2eff3212ff236b9f"
+            ],
+            "index": "pypi",
+            "markers": "sys_platform == 'linux'",
+            "version": "==1.17.0"
+        },
+        "pygobject": {
+            "hashes": [
+                "sha256:f704f4be3b4ae3cae70acf82ac64a8c7c44d3acad2d33e9849056ac317345f5e"
+            ],
+            "index": "pypi",
+            "markers": "sys_platform == 'linux'",
+            "version": "==3.28.2"
         },
         "pyserial": {
             "hashes": [

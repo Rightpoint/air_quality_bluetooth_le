@@ -13,7 +13,8 @@ oauth2client = "*"
 pytz = "*"
 dbus-python = { version = "*", sys_platform = "== 'linux'"}
 bluezero = { version = "*", sys_platform = "== 'linux'"}
-# PyGObject = { version = "*", sys_platform = "== 'linux'"}
+PyGObject = { version = "*", sys_platform = "== 'linux'"}
+pycairo = { version = "*", sys_platform = "== 'linux'"}
 
 [dev-packages]
 bumpversion = "*"
