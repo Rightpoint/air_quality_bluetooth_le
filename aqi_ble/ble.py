@@ -16,6 +16,7 @@ from bluezero import adapter
 from bluezero import advertisement
 from bluezero import localGATT
 from bluezero import GATT
+from .sensor import SensorReading
 
 # constants
 AQI_PM_SRVC = '22341000-1234-1234-1234-123456789abc'
@@ -62,16 +63,25 @@ class AQIChrc(localGATT.Characteristic):
         self.id = id
         self.uuid = uuid
 
-    def pm_readings_cb(self):
-        reading = self.get_reading()
-        return self.set_chrc_value(reading)
-
+    @property
     def get_reading(self):
-        readings = get_pm_readings()
+        return self._get_reading
+
+    @get_reading.setter
+    def get_reading(self, value):
+        self._get_reading = value
+
+    def pm_readings_cb(self):
+        get_reading_function = self.get_reading
+        reading = get_reading_function()
+        value = self.parse_reading(reading)
+        return self.set_chrc_value(value)
+
+    def parse_reading(self, reading: SensorReading):
         if self.uuid == PM_2_5_CHRC:
-            return readings[0]
+            return reading.pm2_5
         elif self.uuid == PM_10_CHRC:
-            return readings[1]
+            return reading.pm10
         else:
             return 0.0
 
@@ -184,6 +194,14 @@ class BLE_Peripheral:
             self.dongle.powered = True
         ad_manager = advertisement.AdvertisingManager(self.dongle.address)
         ad_manager.register_advertisement(advert, {})
+
+    @property
+    def get_reading(self):
+        return self._get_reading
+
+    @get_reading.setter
+    def get_reading(self, value):
+        self._get_reading = value
 
     def add_call_back(self, callback):
         self.pm_2_5_charc.PropertiesChanged = callback
