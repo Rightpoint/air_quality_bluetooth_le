@@ -30,6 +30,7 @@ class Manager:
             location = Location(
                 latitude=coordinate[0], longitude=coordinate[1], elevation=elevation)
         self.sensor = Sensor(path=path, location=location, name=name)
+        self.reset_sensor()
         self.sheet: Optional[Spreadsheet] = None
         if json_keyfile is not None and sheet_url is not None:
             self.sheet = Spreadsheet(
@@ -37,11 +38,13 @@ class Manager:
         if enable_bluetooth is True:
             self.peripheral = BLE_Peripheral()
             self.peripheral.get_reading = self.get_reading
+            self.peripheral.start_bt()
 
     def reset_sensor(self):
         self.sensor.reset()
 
     def get_reading(self):
+        reading = None
         try:
             reading = self.sensor.get_reading()
         except (KeyboardInterrupt, SystemExit):
@@ -58,3 +61,4 @@ class Manager:
                 raise
             except Exception as e:
                 print(f"Could not post to spreadsheet: {e}", file=sys.stderr)
+        return reading

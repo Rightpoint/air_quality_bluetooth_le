@@ -155,6 +155,27 @@ On your Raspberry Pi you'll need `libdbus` installed to install the Python depen
 $ sudo apt-get install libdbus-1-dev gobject-introspection
 ```
 
+Install gobject-introspection `'gobject-introspection-1.0 >= 1.46.0'` because Debian has an old version.
+
+```bash
+$ sudo apt-get install flex bison libffi-dev libmount-dev -y
+$ sudo apt-get build-dep glib2.0
+$ sudo apt-get build-dep gobject-introspection
+$ sudo apt-get build-dep python3-gi
+$ wget https://download.gnome.org/sources/glib/2.56/glib-2.56.1.tar.xz
+$ tar -xf glib-2.56.1.tar.xz
+$ cd glib-2.56.1
+$ ./configure --with-python=/usr/bin/python3
+$ make
+$ make install
+$ wget https://download.gnome.org/sources/gobject-introspection/1.56/gobject-introspection-1.56.1.tar.xz
+$ tar -xvf gobject-introspection-1.56.1.tar.xz
+$ cd gobject-introspection-1.56.1
+$ ./configure --with-python=/usr/bin/python3
+$ make
+$ make install
+```
+
 
 ## Dependencies
 
