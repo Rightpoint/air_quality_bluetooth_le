@@ -51,7 +51,7 @@ def hex_bytes_from_float(value):
 
 
 class AQIChrc(localGATT.Characteristic):
-    def __init__(self, id: int, uuid: str, service: localGATT.Service, initial_value, name: str):
+    def __init__(self, id: int, uuid: str, service: localGATT.Service, initial_value, name: str, reading_callback):
         localGATT.Characteristic.__init__(self,
                                           id,
                                           uuid,
@@ -62,17 +62,10 @@ class AQIChrc(localGATT.Characteristic):
         self.name = name
         self.id = id
         self.uuid = uuid
-
-    @property
-    def get_reading(self):
-        return self._get_reading
-
-    @get_reading.setter
-    def get_reading(self, value):
-        self._get_reading = value
+        self._get_reading = reading_callback
 
     def pm_readings_cb(self):
-        get_reading_function = self.get_reading
+        get_reading_function = self._get_reading
         reading = get_reading_function()
         value = self.parse_reading(reading)
         return self.set_chrc_value(value)
@@ -129,7 +122,7 @@ class AQIChrc(localGATT.Characteristic):
 
 
 class BLE_Peripheral:
-    def __init__(self):
+    def __init__(self, reading_callback):
         self.bus = dbus.SystemBus()
         self.app = localGATT.Application()
         self.srv = localGATT.Service(1, AQI_PM_SRVC, True)
@@ -139,14 +132,16 @@ class BLE_Peripheral:
             PM_2_5_CHRC,
             self.srv,
             0.0,
-            'PM 2.5')
+            'PM 2.5',
+            reading_callback)
         self.pm_2_5_charc.service = self.srv.path
         self.pm_10_charc = AQIChrc(
             2,
             PM_10_CHRC,
             self.srv,
             0.0,
-            'PM 10')
+            'PM 10',
+            reading_callback)
         self.pm_10_charc.service = self.srv.path
 
         pm_2_5_format_value = dbus.Array([dbus.Byte(0x0E),
@@ -194,14 +189,6 @@ class BLE_Peripheral:
             self.dongle.powered = True
         ad_manager = advertisement.AdvertisingManager(self.dongle.address)
         ad_manager.register_advertisement(advert, {})
-
-    @property
-    def get_reading(self):
-        return self._get_reading
-
-    @get_reading.setter
-    def get_reading(self, value):
-        self._get_reading = value
 
     def add_call_back(self, callback):
         self.pm_2_5_charc.PropertiesChanged = callback

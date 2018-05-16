@@ -36,8 +36,7 @@ class Manager:
             self.sheet = Spreadsheet(
                 json_keyfile=json_keyfile, sheet_url=sheet_url)
         if enable_bluetooth is True:
-            self.peripheral = BLE_Peripheral()
-            self.peripheral.get_reading = self.get_reading
+            self.peripheral = BLE_Peripheral(self.get_reading)
             self.peripheral.start_bt()
 
     def reset_sensor(self):
