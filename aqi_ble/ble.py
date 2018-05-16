@@ -19,7 +19,7 @@ from bluezero import GATT
 from .sensor import SensorReading
 
 # constants
-AQI_PM_SRVC = '22341000-1234-1234-1234-123456789abc'
+AQI_PM_SRVC = '22AF619F-4A1B-4BCB-B481-5B13BFE86E94'
 PM_2_5_CHRC = '2A6E'
 PM_10_CHRC = '2A6F'
 PM_2_5_FMT_DSCP = '2904'
