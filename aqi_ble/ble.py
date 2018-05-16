@@ -98,6 +98,7 @@ class AQIChrc(localGATT.Characteristic):
         GObject.timeout_add(500, self.pm_readings_cb)
 
     def ReadValue(self, options):
+        self.pm_readings_cb()
         return dbus.Array(
             hex_bytes_from_float(
                 self.props[constants.GATT_CHRC_IFACE]['Value'])
