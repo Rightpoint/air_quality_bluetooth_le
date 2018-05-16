@@ -176,6 +176,27 @@ $ make
 $ make install
 ```
 
+### systemd service
+
+`/etc/systemd/system/sds011.service`
+
+```
+[Unit]
+Description=sds011
+
+[Service]
+ExecStart=/home/pi/air_quality_bluetooth_le/aqi/bin/python /home/pi/air_quality_bluetooth_le/cli.py -p /dev/ttyUSB0 --enable_bluetooth true
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+To restart the service if it's having problems:
+
+```
+$ sudo systemctl restart sds011.service
+```
 
 ## Dependencies
 
