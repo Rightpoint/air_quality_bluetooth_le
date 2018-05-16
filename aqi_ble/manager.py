@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from .sheets import Spreadsheet
 from .sensor import Sensor, SensorReading, Location
 from typing import Optional, Tuple
 import sys
@@ -14,7 +13,6 @@ except ImportError:
 
 class Manager:
     sensor: Sensor
-    sheet: Optional[Spreadsheet]
     peripheral: Optional[BLE_Peripheral]
 
     def __init__(self,
@@ -31,8 +29,10 @@ class Manager:
                 latitude=coordinate[0], longitude=coordinate[1], elevation=elevation)
         self.sensor = Sensor(path=path, location=location, name=name)
         self.reset_sensor()
-        self.sheet: Optional[Spreadsheet] = None
+        self.sheet = None
         if json_keyfile is not None and sheet_url is not None:
+            print(f"Importing spreadsheet...")
+            from .sheets import Spreadsheet
             self.sheet = Spreadsheet(
                 json_keyfile=json_keyfile, sheet_url=sheet_url)
         if enable_bluetooth is True:
