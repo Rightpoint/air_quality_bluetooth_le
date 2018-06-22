@@ -6,7 +6,9 @@ name = "pypi"
 [packages]
 click = "*"
 pyserial = "*"
-# Backport of Python 3.7 dataclasses. Remove when Python 3.7 is released!
+# Backport of Python 3.6 format strings
+future-fstrings = "*"
+# Backport of Python 3.7 data classes
 dataclasses = "*"
 gspread = "*"
 oauth2client = "*"
@@ -31,4 +33,4 @@ pylint = "*"
 autopep8 = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3"

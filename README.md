@@ -40,7 +40,7 @@ Then clone the repo and run `pipenv` to install the dependencies:
 ```
 $ git clone https://github.com/Raizlabs/air_quality_bluetooth_le.git
 $ cd air_quality_bluetooth_le/
-$ pipenv install --dev
+$ pipenv --site-packages install --dev
 ```
 
 ### Running
