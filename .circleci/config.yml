@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.5
+      - image: cimg/python:3.8.5
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -23,25 +23,26 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Pipfile.lock" }}
+          - v1-dependencies-{{ checksum "poetry.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run:
           name: apt-get install
           command: |
+            sudo apt update
             sudo apt-get install -y libdbus-1-dev libcairo2-dev libglib2.0-dev libgirepository1.0-dev
 
       - run:
-          name: Sync Pipfile
+          name: Sync dependencies
           command: |
-            pipenv sync --dev
+            poetry install
 
       - save_cache:
           paths:
             - ~/.local
             - ~/.cache
-          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
+          key: v1-dependencies-{{ checksum "poetry.lock" }}
         
       # run tests!
       # this example uses Django's built-in test-runner
@@ -51,4 +52,4 @@ jobs:
       - run:
           name: Run Tests
           command: |
-            pipenv run make test
+            poetry run make test

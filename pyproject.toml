@@ -1,0 +1,34 @@
+[tool]
+[tool.poetry]
+name = "aqi_ble"
+version = "0.1.0"
+description = "Top-level package for Air Quality Bluetooth LE."
+authors = ["Chris Ballinger <chris.ballinger@raizlabs.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.2"
+bluezero = { version = "*", "platform" = "linux"}
+click = "*"
+dataclasses = "*"
+dbus-python = { version = "*", "platform" = "linux"}
+future-fstrings = "*"
+gspread = "*"
+oauth2client = "*"
+pycairo = { version = "*", "platform" = "linux"}
+pygobject = { version = "*", "platform" = "linux"}
+pyserial = "*"
+pytz = "*"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "*"
+bumpversion = "*"
+coverage = "*"
+flake8 = "*"
+ptvsd = "*"
+pylint = "*"
+pytest = "*"
+pytest-runner = "*"
+sphinx = "*"
+tox = "*"
+twine = "*"
+watchdog = "*"
